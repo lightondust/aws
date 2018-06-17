@@ -1,0 +1,691 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# インストール"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "awscliのインストール：\n",
+    "\n",
+    "```pip install awscli```"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "aws設定：\n",
+    "\n",
+    "```aws configure```"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "boto3のインストール\n",
+    "\n",
+    "```pip install boto3```"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# 使う"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import boto3"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "ec2 = boto3.client(\"ec2\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "{u'Reservations': [{u'Groups': [],\n",
+       "   u'Instances': [{u'AmiLaunchIndex': 0,\n",
+       "     u'Architecture': 'x86_64',\n",
+       "     u'BlockDeviceMappings': [{u'DeviceName': '/dev/xvda',\n",
+       "       u'Ebs': {u'AttachTime': datetime.datetime(2017, 12, 10, 6, 20, 25, tzinfo=tzutc()),\n",
+       "        u'DeleteOnTermination': True,\n",
+       "        u'Status': 'attached',\n",
+       "        u'VolumeId': 'vol-031d621365daeaa5e'}}],\n",
+       "     u'ClientToken': 'stock-WebSe-1VW9HLZFZUS0Y',\n",
+       "     u'EbsOptimized': False,\n",
+       "     u'EnaSupport': True,\n",
+       "     u'Hypervisor': 'xen',\n",
+       "     u'ImageId': 'ami-da9e2cbc',\n",
+       "     u'InstanceId': 'i-0e22faee3f2ebd2ac',\n",
+       "     u'InstanceType': 't2.micro',\n",
+       "     u'KeyName': 'stock-tokyo',\n",
+       "     u'LaunchTime': datetime.datetime(2017, 12, 10, 6, 20, 24, tzinfo=tzutc()),\n",
+       "     u'Monitoring': {u'State': 'disabled'},\n",
+       "     u'NetworkInterfaces': [{u'Association': {u'IpOwnerId': '110144130993',\n",
+       "        u'PublicDnsName': 'ec2-52-68-76-91.ap-northeast-1.compute.amazonaws.com',\n",
+       "        u'PublicIp': '52.68.76.91'},\n",
+       "       u'Attachment': {u'AttachTime': datetime.datetime(2017, 12, 10, 6, 20, 24, tzinfo=tzutc()),\n",
+       "        u'AttachmentId': 'eni-attach-b5bd11d1',\n",
+       "        u'DeleteOnTermination': True,\n",
+       "        u'DeviceIndex': 0,\n",
+       "        u'Status': 'attached'},\n",
+       "       u'Description': '',\n",
+       "       u'Groups': [{u'GroupId': 'sg-5c39ed25',\n",
+       "         u'GroupName': 'stock-tokyo-WebServerSecurityGroup-1FYLV8SGFA5C1'}],\n",
+       "       u'Ipv6Addresses': [],\n",
+       "       u'MacAddress': '06:fb:3c:97:d4:5c',\n",
+       "       u'NetworkInterfaceId': 'eni-6faf3653',\n",
+       "       u'OwnerId': '110144130993',\n",
+       "       u'PrivateDnsName': 'ip-172-31-28-12.ap-northeast-1.compute.internal',\n",
+       "       u'PrivateIpAddress': '172.31.28.12',\n",
+       "       u'PrivateIpAddresses': [{u'Association': {u'IpOwnerId': '110144130993',\n",
+       "          u'PublicDnsName': 'ec2-52-68-76-91.ap-northeast-1.compute.amazonaws.com',\n",
+       "          u'PublicIp': '52.68.76.91'},\n",
+       "         u'Primary': True,\n",
+       "         u'PrivateDnsName': 'ip-172-31-28-12.ap-northeast-1.compute.internal',\n",
+       "         u'PrivateIpAddress': '172.31.28.12'},\n",
+       "        {u'Primary': False,\n",
+       "         u'PrivateDnsName': 'ip-172-31-27-122.ap-northeast-1.compute.internal',\n",
+       "         u'PrivateIpAddress': '172.31.27.122'}],\n",
+       "       u'SourceDestCheck': True,\n",
+       "       u'Status': 'in-use',\n",
+       "       u'SubnetId': 'subnet-45e07c0c',\n",
+       "       u'VpcId': 'vpc-1e14ed79'}],\n",
+       "     u'Placement': {u'AvailabilityZone': 'ap-northeast-1a',\n",
+       "      u'GroupName': '',\n",
+       "      u'Tenancy': 'default'},\n",
+       "     u'PrivateDnsName': 'ip-172-31-28-12.ap-northeast-1.compute.internal',\n",
+       "     u'PrivateIpAddress': '172.31.28.12',\n",
+       "     u'ProductCodes': [],\n",
+       "     u'PublicDnsName': 'ec2-52-68-76-91.ap-northeast-1.compute.amazonaws.com',\n",
+       "     u'PublicIpAddress': '52.68.76.91',\n",
+       "     u'RootDeviceName': '/dev/xvda',\n",
+       "     u'RootDeviceType': 'ebs',\n",
+       "     u'SecurityGroups': [{u'GroupId': 'sg-5c39ed25',\n",
+       "       u'GroupName': 'stock-tokyo-WebServerSecurityGroup-1FYLV8SGFA5C1'}],\n",
+       "     u'SourceDestCheck': True,\n",
+       "     u'State': {u'Code': 16, u'Name': 'running'},\n",
+       "     u'StateTransitionReason': '',\n",
+       "     u'SubnetId': 'subnet-45e07c0c',\n",
+       "     u'Tags': [{u'Key': 'aws:cloudformation:stack-name',\n",
+       "       u'Value': 'stock-tokyo'},\n",
+       "      {u'Key': 'aws:cloudformation:stack-id',\n",
+       "       u'Value': 'arn:aws:cloudformation:ap-northeast-1:110144130993:stack/stock-tokyo/2d6c4510-dd72-11e7-a3c2-500c44f24ce6'},\n",
+       "      {u'Key': 'Name', u'Value': 'web'},\n",
+       "      {u'Key': 'aws:cloudformation:logical-id',\n",
+       "       u'Value': 'WebServerInstance'}],\n",
+       "     u'VirtualizationType': 'hvm',\n",
+       "     u'VpcId': 'vpc-1e14ed79'}],\n",
+       "   u'OwnerId': '110144130993',\n",
+       "   u'RequesterId': '331753876576',\n",
+       "   u'ReservationId': 'r-078a6f60c1632b72c'},\n",
+       "  {u'Groups': [],\n",
+       "   u'Instances': [{u'AmiLaunchIndex': 0,\n",
+       "     u'Architecture': 'x86_64',\n",
+       "     u'BlockDeviceMappings': [{u'DeviceName': '/dev/xvda',\n",
+       "       u'Ebs': {u'AttachTime': datetime.datetime(2018, 1, 30, 14, 43, 11, tzinfo=tzutc()),\n",
+       "        u'DeleteOnTermination': True,\n",
+       "        u'Status': 'attached',\n",
+       "        u'VolumeId': 'vol-079bab626d55cfa29'}}],\n",
+       "     u'ClientToken': '',\n",
+       "     u'EbsOptimized': False,\n",
+       "     u'EnaSupport': True,\n",
+       "     u'Hypervisor': 'xen',\n",
+       "     u'ImageId': 'ami-ceafcba8',\n",
+       "     u'InstanceId': 'i-0ccc4f9d10e7549a7',\n",
+       "     u'InstanceType': 't2.micro',\n",
+       "     u'KeyName': 'stock-tokyo',\n",
+       "     u'LaunchTime': datetime.datetime(2018, 2, 17, 7, 26, 17, tzinfo=tzutc()),\n",
+       "     u'Monitoring': {u'State': 'disabled'},\n",
+       "     u'NetworkInterfaces': [{u'Association': {u'IpOwnerId': 'amazon',\n",
+       "        u'PublicDnsName': 'ec2-13-115-16-253.ap-northeast-1.compute.amazonaws.com',\n",
+       "        u'PublicIp': '13.115.16.253'},\n",
+       "       u'Attachment': {u'AttachTime': datetime.datetime(2018, 1, 30, 14, 43, 10, tzinfo=tzutc()),\n",
+       "        u'AttachmentId': 'eni-attach-f6087692',\n",
+       "        u'DeleteOnTermination': True,\n",
+       "        u'DeviceIndex': 0,\n",
+       "        u'Status': 'attached'},\n",
+       "       u'Description': '',\n",
+       "       u'Groups': [{u'GroupId': 'sg-b0bc24c9',\n",
+       "         u'GroupName': 'launch-wizard-1'}],\n",
+       "       u'Ipv6Addresses': [],\n",
+       "       u'MacAddress': '06:7d:92:76:6b:18',\n",
+       "       u'NetworkInterfaceId': 'eni-0802b037',\n",
+       "       u'OwnerId': '110144130993',\n",
+       "       u'PrivateDnsName': 'ip-172-31-18-215.ap-northeast-1.compute.internal',\n",
+       "       u'PrivateIpAddress': '172.31.18.215',\n",
+       "       u'PrivateIpAddresses': [{u'Association': {u'IpOwnerId': 'amazon',\n",
+       "          u'PublicDnsName': 'ec2-13-115-16-253.ap-northeast-1.compute.amazonaws.com',\n",
+       "          u'PublicIp': '13.115.16.253'},\n",
+       "         u'Primary': True,\n",
+       "         u'PrivateDnsName': 'ip-172-31-18-215.ap-northeast-1.compute.internal',\n",
+       "         u'PrivateIpAddress': '172.31.18.215'},\n",
+       "        {u'Primary': False,\n",
+       "         u'PrivateDnsName': 'ip-172-31-30-165.ap-northeast-1.compute.internal',\n",
+       "         u'PrivateIpAddress': '172.31.30.165'}],\n",
+       "       u'SourceDestCheck': True,\n",
+       "       u'Status': 'in-use',\n",
+       "       u'SubnetId': 'subnet-45e07c0c',\n",
+       "       u'VpcId': 'vpc-1e14ed79'}],\n",
+       "     u'Placement': {u'AvailabilityZone': 'ap-northeast-1a',\n",
+       "      u'GroupName': '',\n",
+       "      u'Tenancy': 'default'},\n",
+       "     u'PrivateDnsName': 'ip-172-31-18-215.ap-northeast-1.compute.internal',\n",
+       "     u'PrivateIpAddress': '172.31.18.215',\n",
+       "     u'ProductCodes': [],\n",
+       "     u'PublicDnsName': 'ec2-13-115-16-253.ap-northeast-1.compute.amazonaws.com',\n",
+       "     u'PublicIpAddress': '13.115.16.253',\n",
+       "     u'RootDeviceName': '/dev/xvda',\n",
+       "     u'RootDeviceType': 'ebs',\n",
+       "     u'SecurityGroups': [{u'GroupId': 'sg-b0bc24c9',\n",
+       "       u'GroupName': 'launch-wizard-1'}],\n",
+       "     u'SourceDestCheck': True,\n",
+       "     u'State': {u'Code': 16, u'Name': 'running'},\n",
+       "     u'StateTransitionReason': '',\n",
+       "     u'SubnetId': 'subnet-45e07c0c',\n",
+       "     u'Tags': [{u'Key': 'Name', u'Value': 'jupyter'}],\n",
+       "     u'VirtualizationType': 'hvm',\n",
+       "     u'VpcId': 'vpc-1e14ed79'}],\n",
+       "   u'OwnerId': '110144130993',\n",
+       "   u'ReservationId': 'r-0d685f54c01263291'}],\n",
+       " 'ResponseMetadata': {'HTTPHeaders': {'content-type': 'text/xml;charset=UTF-8',\n",
+       "   'date': 'Sat, 17 Feb 2018 08:11:04 GMT',\n",
+       "   'server': 'AmazonEC2',\n",
+       "   'transfer-encoding': 'chunked',\n",
+       "   'vary': 'Accept-Encoding'},\n",
+       "  'HTTPStatusCode': 200,\n",
+       "  'RequestId': 'eb4c45e4-92c2-4299-aa80-f04d43d662fd',\n",
+       "  'RetryAttempts': 0}}"
+      ]
+     },
+     "execution_count": 4,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "ec2.describe_instances()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## jupyterインスタンス情報を取得"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "jupyter_id=\"i-0ccc4f9d10e7549a7\"\n",
+    "jupyter_filter = [{\"Name\":\"instance-id\", \"Values\":[jupyter_id]}]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "{'Reservations': [{'Groups': [],\n",
+       "   'Instances': [{'AmiLaunchIndex': 0,\n",
+       "     'Architecture': 'x86_64',\n",
+       "     'BlockDeviceMappings': [{'DeviceName': '/dev/xvda',\n",
+       "       'Ebs': {'AttachTime': datetime.datetime(2018, 1, 30, 14, 43, 11, tzinfo=tzutc()),\n",
+       "        'DeleteOnTermination': True,\n",
+       "        'Status': 'attached',\n",
+       "        'VolumeId': 'vol-079bab626d55cfa29'}}],\n",
+       "     'ClientToken': '',\n",
+       "     'EbsOptimized': False,\n",
+       "     'EnaSupport': True,\n",
+       "     'Hypervisor': 'xen',\n",
+       "     'ImageId': 'ami-ceafcba8',\n",
+       "     'InstanceId': 'i-0ccc4f9d10e7549a7',\n",
+       "     'InstanceType': 't2.micro',\n",
+       "     'KeyName': 'stock-tokyo',\n",
+       "     'LaunchTime': datetime.datetime(2018, 2, 18, 5, 19, 58, tzinfo=tzutc()),\n",
+       "     'Monitoring': {'State': 'disabled'},\n",
+       "     'NetworkInterfaces': [{'Association': {'IpOwnerId': 'amazon',\n",
+       "        'PublicDnsName': 'ec2-54-250-25-16.ap-northeast-1.compute.amazonaws.com',\n",
+       "        'PublicIp': '54.250.25.16'},\n",
+       "       'Attachment': {'AttachTime': datetime.datetime(2018, 1, 30, 14, 43, 10, tzinfo=tzutc()),\n",
+       "        'AttachmentId': 'eni-attach-f6087692',\n",
+       "        'DeleteOnTermination': True,\n",
+       "        'DeviceIndex': 0,\n",
+       "        'Status': 'attached'},\n",
+       "       'Description': '',\n",
+       "       'Groups': [{'GroupId': 'sg-b0bc24c9', 'GroupName': 'launch-wizard-1'}],\n",
+       "       'Ipv6Addresses': [],\n",
+       "       'MacAddress': '06:7d:92:76:6b:18',\n",
+       "       'NetworkInterfaceId': 'eni-0802b037',\n",
+       "       'OwnerId': '110144130993',\n",
+       "       'PrivateDnsName': 'ip-172-31-18-215.ap-northeast-1.compute.internal',\n",
+       "       'PrivateIpAddress': '172.31.18.215',\n",
+       "       'PrivateIpAddresses': [{'Association': {'IpOwnerId': 'amazon',\n",
+       "          'PublicDnsName': 'ec2-54-250-25-16.ap-northeast-1.compute.amazonaws.com',\n",
+       "          'PublicIp': '54.250.25.16'},\n",
+       "         'Primary': True,\n",
+       "         'PrivateDnsName': 'ip-172-31-18-215.ap-northeast-1.compute.internal',\n",
+       "         'PrivateIpAddress': '172.31.18.215'},\n",
+       "        {'Primary': False,\n",
+       "         'PrivateDnsName': 'ip-172-31-30-165.ap-northeast-1.compute.internal',\n",
+       "         'PrivateIpAddress': '172.31.30.165'}],\n",
+       "       'SourceDestCheck': True,\n",
+       "       'Status': 'in-use',\n",
+       "       'SubnetId': 'subnet-45e07c0c',\n",
+       "       'VpcId': 'vpc-1e14ed79'}],\n",
+       "     'Placement': {'AvailabilityZone': 'ap-northeast-1a',\n",
+       "      'GroupName': '',\n",
+       "      'Tenancy': 'default'},\n",
+       "     'PrivateDnsName': 'ip-172-31-18-215.ap-northeast-1.compute.internal',\n",
+       "     'PrivateIpAddress': '172.31.18.215',\n",
+       "     'ProductCodes': [],\n",
+       "     'PublicDnsName': 'ec2-54-250-25-16.ap-northeast-1.compute.amazonaws.com',\n",
+       "     'PublicIpAddress': '54.250.25.16',\n",
+       "     'RootDeviceName': '/dev/xvda',\n",
+       "     'RootDeviceType': 'ebs',\n",
+       "     'SecurityGroups': [{'GroupId': 'sg-b0bc24c9',\n",
+       "       'GroupName': 'launch-wizard-1'}],\n",
+       "     'SourceDestCheck': True,\n",
+       "     'State': {'Code': 16, 'Name': 'running'},\n",
+       "     'StateTransitionReason': '',\n",
+       "     'SubnetId': 'subnet-45e07c0c',\n",
+       "     'Tags': [{'Key': 'Name', 'Value': 'jupyter'}],\n",
+       "     'VirtualizationType': 'hvm',\n",
+       "     'VpcId': 'vpc-1e14ed79'}],\n",
+       "   'OwnerId': '110144130993',\n",
+       "   'ReservationId': 'r-0d685f54c01263291'}],\n",
+       " 'ResponseMetadata': {'HTTPHeaders': {'content-type': 'text/xml;charset=UTF-8',\n",
+       "   'date': 'Sun, 18 Feb 2018 08:02:19 GMT',\n",
+       "   'server': 'AmazonEC2',\n",
+       "   'transfer-encoding': 'chunked',\n",
+       "   'vary': 'Accept-Encoding'},\n",
+       "  'HTTPStatusCode': 200,\n",
+       "  'RequestId': 'ddc838b0-0273-4586-b7a7-1aa08ee9a23c',\n",
+       "  'RetryAttempts': 0}}"
+      ]
+     },
+     "execution_count": 10,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "ec2.describe_instances(Filters=jupyter_filter)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "{'AmiLaunchIndex': 0,\n",
+       " 'Architecture': 'x86_64',\n",
+       " 'BlockDeviceMappings': [{'DeviceName': '/dev/xvda',\n",
+       "   'Ebs': {'AttachTime': datetime.datetime(2018, 1, 30, 14, 43, 11, tzinfo=tzutc()),\n",
+       "    'DeleteOnTermination': True,\n",
+       "    'Status': 'attached',\n",
+       "    'VolumeId': 'vol-079bab626d55cfa29'}}],\n",
+       " 'ClientToken': '',\n",
+       " 'EbsOptimized': False,\n",
+       " 'EnaSupport': True,\n",
+       " 'Hypervisor': 'xen',\n",
+       " 'ImageId': 'ami-ceafcba8',\n",
+       " 'InstanceId': 'i-0ccc4f9d10e7549a7',\n",
+       " 'InstanceType': 't2.micro',\n",
+       " 'KeyName': 'stock-tokyo',\n",
+       " 'LaunchTime': datetime.datetime(2018, 2, 18, 5, 19, 58, tzinfo=tzutc()),\n",
+       " 'Monitoring': {'State': 'disabled'},\n",
+       " 'NetworkInterfaces': [{'Association': {'IpOwnerId': 'amazon',\n",
+       "    'PublicDnsName': 'ec2-54-250-25-16.ap-northeast-1.compute.amazonaws.com',\n",
+       "    'PublicIp': '54.250.25.16'},\n",
+       "   'Attachment': {'AttachTime': datetime.datetime(2018, 1, 30, 14, 43, 10, tzinfo=tzutc()),\n",
+       "    'AttachmentId': 'eni-attach-f6087692',\n",
+       "    'DeleteOnTermination': True,\n",
+       "    'DeviceIndex': 0,\n",
+       "    'Status': 'attached'},\n",
+       "   'Description': '',\n",
+       "   'Groups': [{'GroupId': 'sg-b0bc24c9', 'GroupName': 'launch-wizard-1'}],\n",
+       "   'Ipv6Addresses': [],\n",
+       "   'MacAddress': '06:7d:92:76:6b:18',\n",
+       "   'NetworkInterfaceId': 'eni-0802b037',\n",
+       "   'OwnerId': '110144130993',\n",
+       "   'PrivateDnsName': 'ip-172-31-18-215.ap-northeast-1.compute.internal',\n",
+       "   'PrivateIpAddress': '172.31.18.215',\n",
+       "   'PrivateIpAddresses': [{'Association': {'IpOwnerId': 'amazon',\n",
+       "      'PublicDnsName': 'ec2-54-250-25-16.ap-northeast-1.compute.amazonaws.com',\n",
+       "      'PublicIp': '54.250.25.16'},\n",
+       "     'Primary': True,\n",
+       "     'PrivateDnsName': 'ip-172-31-18-215.ap-northeast-1.compute.internal',\n",
+       "     'PrivateIpAddress': '172.31.18.215'},\n",
+       "    {'Primary': False,\n",
+       "     'PrivateDnsName': 'ip-172-31-30-165.ap-northeast-1.compute.internal',\n",
+       "     'PrivateIpAddress': '172.31.30.165'}],\n",
+       "   'SourceDestCheck': True,\n",
+       "   'Status': 'in-use',\n",
+       "   'SubnetId': 'subnet-45e07c0c',\n",
+       "   'VpcId': 'vpc-1e14ed79'}],\n",
+       " 'Placement': {'AvailabilityZone': 'ap-northeast-1a',\n",
+       "  'GroupName': '',\n",
+       "  'Tenancy': 'default'},\n",
+       " 'PrivateDnsName': 'ip-172-31-18-215.ap-northeast-1.compute.internal',\n",
+       " 'PrivateIpAddress': '172.31.18.215',\n",
+       " 'ProductCodes': [],\n",
+       " 'PublicDnsName': 'ec2-54-250-25-16.ap-northeast-1.compute.amazonaws.com',\n",
+       " 'PublicIpAddress': '54.250.25.16',\n",
+       " 'RootDeviceName': '/dev/xvda',\n",
+       " 'RootDeviceType': 'ebs',\n",
+       " 'SecurityGroups': [{'GroupId': 'sg-b0bc24c9',\n",
+       "   'GroupName': 'launch-wizard-1'}],\n",
+       " 'SourceDestCheck': True,\n",
+       " 'State': {'Code': 16, 'Name': 'running'},\n",
+       " 'StateTransitionReason': '',\n",
+       " 'SubnetId': 'subnet-45e07c0c',\n",
+       " 'Tags': [{'Key': 'Name', 'Value': 'jupyter'}],\n",
+       " 'VirtualizationType': 'hvm',\n",
+       " 'VpcId': 'vpc-1e14ed79'}"
+      ]
+     },
+     "execution_count": 18,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "ec2.describe_instances(Filters=jupyter_filter)[\"Reservations\"][0][\"Instances\"][0]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "metadata": {
+    "scrolled": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "'54.250.25.16'"
+      ]
+     },
+     "execution_count": 24,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "ec2.describe_instances(Filters=jupyter_filter)[\"Reservations\"][0][\"Instances\"][0][\"NetworkInterfaces\"][0][\"Association\"][\"PublicIp\"]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### ipアドレス取得"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 50,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "ec2r = boto3.resource(\"ec2\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 51,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "instance = ec2r.Instance(jupyter_id)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 52,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "'54.95.74.184'"
+      ]
+     },
+     "execution_count": 52,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "instance.public_ip_address"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 47,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "'ec2-54-95-74-184.ap-northeast-1.compute.amazonaws.com'"
+      ]
+     },
+     "execution_count": 47,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "instance.public_dns_name"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 49,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "ec2.Subnet(id='subnet-45e07c0c')"
+      ]
+     },
+     "execution_count": 49,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "instance.subnet"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 53,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "{'ResponseMetadata': {'HTTPHeaders': {'content-length': '579',\n",
+       "   'content-type': 'text/xml;charset=UTF-8',\n",
+       "   'date': 'Sun, 18 Feb 2018 10:08:18 GMT',\n",
+       "   'server': 'AmazonEC2'},\n",
+       "  'HTTPStatusCode': 200,\n",
+       "  'RequestId': '5a596137-be02-436d-a35f-ccca8ea079ea',\n",
+       "  'RetryAttempts': 0},\n",
+       " 'StoppingInstances': [{'CurrentState': {'Code': 64, 'Name': 'stopping'},\n",
+       "   'InstanceId': 'i-0ccc4f9d10e7549a7',\n",
+       "   'PreviousState': {'Code': 16, 'Name': 'running'}}]}"
+      ]
+     },
+     "execution_count": 53,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "instance.stop()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 54,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "instance.wait_until_stopped()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 55,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "{'ResponseMetadata': {'HTTPHeaders': {'content-length': '579',\n",
+       "   'content-type': 'text/xml;charset=UTF-8',\n",
+       "   'date': 'Sun, 18 Feb 2018 10:08:49 GMT',\n",
+       "   'server': 'AmazonEC2'},\n",
+       "  'HTTPStatusCode': 200,\n",
+       "  'RequestId': '7e0d19b0-a271-41ef-8201-c6be405c7d67',\n",
+       "  'RetryAttempts': 0},\n",
+       " 'StartingInstances': [{'CurrentState': {'Code': 0, 'Name': 'pending'},\n",
+       "   'InstanceId': 'i-0ccc4f9d10e7549a7',\n",
+       "   'PreviousState': {'Code': 80, 'Name': 'stopped'}}]}"
+      ]
+     },
+     "execution_count": 55,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "instance.start()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 56,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "instance.wait_until_running()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 57,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "'54.95.224.182'"
+      ]
+     },
+     "execution_count": 57,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "instance.public_ip_address"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.5.3"
+  },
+  "toc": {
+   "nav_menu": {},
+   "number_sections": true,
+   "sideBar": false,
+   "skip_h1_title": false,
+   "title_cell": "Table of Contents",
+   "title_sidebar": "Contents",
+   "toc_cell": false,
+   "toc_position": {
+    "height": "401px",
+    "left": "1160px",
+    "top": "110.5px",
+    "width": "190px"
+   },
+   "toc_section_display": true,
+   "toc_window_display": true
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
